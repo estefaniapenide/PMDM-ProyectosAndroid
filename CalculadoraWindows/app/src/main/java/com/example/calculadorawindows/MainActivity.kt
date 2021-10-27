@@ -2,6 +2,7 @@ package com.example.calculadorawindows
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 
 import com.example.calculadorawindows.databinding.ActivityMainBinding
 
@@ -33,9 +34,9 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text=""
 
         var texto = binding.textView.getText().toString()
-        var numero1 = 0f
-        var numero2 = 0f
-        var resultado = 0f
+        var numero1 = 0.0
+        var numero2 = 0.0
+        var resultado = 0.0
 
         fun textoNumeros(digito:String){
             texto=texto+digito
@@ -43,14 +44,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun guardarNumero1(numTexto : String){
-            numero1 = numTexto.toFloat()
+            numero1 = numTexto.toDouble()
         }
 
         fun guardarNumero2(numTexto : String){
-            numero2 = numTexto.toFloat()
+            numero2 = numTexto.toDouble()
         }
 
-        fun guardarResultado(numero: Float){
+        fun guardarResultado(numero: Double){
             numero1=resultado
         }
 
@@ -103,6 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textView14.setOnClickListener{
+            guardarNumero1(texto)
+            textoNumeros(igual)
+            texto=""
 
         }
 
