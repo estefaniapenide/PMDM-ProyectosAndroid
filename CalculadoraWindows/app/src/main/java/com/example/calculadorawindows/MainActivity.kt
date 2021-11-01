@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var cero="0"
         var uno="1"
         var dos="2"
         var tres="3"
@@ -34,26 +35,22 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text=""
 
         var texto = binding.textView.getText().toString()
-        var numero1 = 0.0
-        var numero2 = 0.0
+        var textoSecundario=""
+        var numero = 0.0
         var resultado = 0.0
 
-        fun textoNumeros(digito:String){
+        fun textoNumeros(digito:String): String{
             texto=texto+digito
             binding.textView.text=texto
+
+            return texto
         }
 
-        fun guardarNumero1(numTexto : String){
-            numero1 = numTexto.toDouble()
+        fun guardarNumero(numTexto : String): Double{
+            numero = numTexto.toDouble()
+            return numero
         }
 
-        fun guardarNumero2(numTexto : String){
-            numero2 = numTexto.toDouble()
-        }
-
-        fun guardarResultado(numero: Double){
-            numero1=resultado
-        }
 
         binding.textView2.setOnClickListener{
             textoNumeros(uno)
@@ -92,7 +89,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textView11.setOnClickListener{
-
+            if(binding.textView.getText()=="0" || binding.textView.getText()==""){
+            }else {
+                textoNumeros(cero)
+            }
         }
 
         binding.textView12.setOnClickListener{
@@ -104,22 +104,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textView14.setOnClickListener{
-            guardarNumero1(texto)
+            Operaciones.numero1 = guardarNumero(texto)
             textoNumeros(igual)
             texto=""
 
         }
 
         binding.textView15.setOnClickListener{
-
+            Operaciones.signo=suma
+            if(Operaciones.numero1==0.0) {
+                Operaciones.numero1 = guardarNumero(texto)
+            }else{
+                Operaciones.numero2=guardarNumero(texto)
+                Operaciones.resultado=Operaciones.elegiroperacion(Operaciones.numero1,Operaciones.numero2,Operaciones.signo)
+                binding.textView.text=Operaciones.resultado.toString()
+            }
+            textoSecundario = textoSecundario+textoNumeros(suma)
+            binding.textView26.text=textoSecundario
+            texto=""
         }
 
         binding.textView16.setOnClickListener{
-
+            Operaciones.numero1=guardarNumero(texto)
+            textoNumeros(resta)
+            texto=""
         }
 
         binding.textView17.setOnClickListener{
-
+            Operaciones.numero1=guardarNumero(texto)
+            textoNumeros(mult)
+            texto=""
         }
 
         binding.textView18.setOnClickListener{
@@ -135,7 +149,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textView21.setOnClickListener{
-
+            resultado=guardarNumero(texto)
+            textoNumeros(div)
+            texto=""
         }
 
         binding.textView22.setOnClickListener{
@@ -153,6 +169,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.textView25.setOnClickListener{
+
+        }
+
+        binding.textView26.setOnClickListener{
 
         }
 
